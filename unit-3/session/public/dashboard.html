@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2 id="welcome"></h2>
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        fetch("/dashboard-data")
+            .then(r => r.json())
+            .then(d => {
+                if (d.username) {
+                    welcome.innerText = "Welcome " + d.username;
+                } else {
+                    location.href = "/";
+                }
+            });
+
+        function logout() {
+            fetch("/logout").then(() => location.href = "/");
+        }
+    </script>
+
+</body>
+
+</html>
