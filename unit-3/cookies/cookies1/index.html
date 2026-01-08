@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie Demo</title>
+</head>
+
+<body>
+
+    <h2>Cookie Set & Read Demo</h2>
+
+    <button onclick="setCookie()">Set Cookie</button>
+    <button onclick="readCookie()">Read Cookie</button>
+
+    <pre id="output"></pre>
+
+    <script>
+        function setCookie() {
+            fetch("http://localhost:4000/set-cookie", {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("output").innerText =
+                        JSON.stringify(data, null, 2);
+                });
+        }
+
+        function readCookie() {
+            fetch("http://localhost:4000/read-cookie", {
+                method: "GET",
+                credentials: "include"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("output").innerText =
+                        JSON.stringify(data, null, 2);
+                });
+        }
+    </script>
+
+</body>
+
+</html>

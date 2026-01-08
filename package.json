@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/arnavprajapati/INT-222-Revision#readme",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "express": "^5.2.1",
     "mongoose": "^9.1.2",
     "nodemon": "^3.1.11"
