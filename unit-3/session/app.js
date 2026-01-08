@@ -12,7 +12,6 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// SESSION
 app.use(
     session({
         secret: "sessionSecret",
@@ -21,10 +20,8 @@ app.use(
     })
 );
 
-// SERVE FRONTEND
 app.use(express.static(path.join(__dirname, "public")));
 
-/* LOGIN */
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
 
@@ -36,7 +33,6 @@ app.post("/login", (req, res) => {
     res.status(401).json({ message: "Invalid credentials" });
 });
 
-/* DASHBOARD */
 app.get("/dashboard-data", (req, res) => {
     if (!req.session.user) {
         return res.status(401).json({ message: "Not logged in" });
@@ -45,7 +41,6 @@ app.get("/dashboard-data", (req, res) => {
     res.json({ username: req.session.user });
 });
 
-/* LOGOUT */
 app.get("/logout", (req, res) => {
     req.session.destroy(() => {
         res.json({ message: "Logged out" });
