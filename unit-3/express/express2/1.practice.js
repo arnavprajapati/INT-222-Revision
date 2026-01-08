@@ -48,7 +48,7 @@ app.get('/product', (req, res) => {
 });
 
 app.get("/welcome", (req, res) => {
-    const name = req.query.name || "Guest"; // reading ?name=Shresth
+    const name = req.query.name || "Guest"; // reading ?name=Arnav
 
     res.status(200).send({
         status: 200,
