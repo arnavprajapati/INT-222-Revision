@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Chat</title>
+</head>
+<body>
+    <h2>User Chat Application</h2>
+
+    <input id="username" placeholder="Enter your name" />
+    <br><br>
+
+    <input id="msg" placeholder="Type message..." autocomplete="off" />
+    <button onclick="sendMessage()">Send</button>
+
+    <ul id="messages"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const socket = io();
+
+        socket.on("chatMessage", (data) => {
+            let li = document.createElement("li");
+            li.innerHTML = `<strong>${data.user}:</strong> ${data.message}`;
+            document.getElementById("messages").appendChild(li);
+        });
+
+        function sendMessage() {
+            let user = document.getElementById("username").value.trim();
+            let message = document.getElementById("msg").value.trim();
+
+            if (user === "") {
+                alert("Please enter your name!");
+                return;
+            }
+            if (message === "") return;
+
+            socket.emit("chatMessage", { user: user, message: message });
+
+            document.getElementById("msg").value = "";
+        }
+    </script>
+</body>
+</html>

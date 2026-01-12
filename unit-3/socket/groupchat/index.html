@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Group Chat</title>
+</head>
+<body>
+    <h2>Group Chat Room</h2>
+
+    <input id="msg" placeholder="Type message..." autocomplete="off" />
+    <button onclick="sendMessage()">Send</button>
+
+    <ul id="messages"></ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const socket = io();
+
+        socket.on("message", (msg) => {
+            let li = document.createElement("li");
+            li.textContent = msg;
+            document.getElementById("messages").appendChild(li);
+        });
+
+        function sendMessage() {
+            let message = document.getElementById("msg").value;
+            if (message.trim() !== "") {
+                socket.emit("message", message);
+            }
+            document.getElementById("msg").value = "";
+        }
+    </script>
+</body>
+</html>
